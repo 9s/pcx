@@ -1,62 +1,121 @@
-/** @noSelfInFile **/
-declare namespace trace {
-    // Returns true if endpoint is hit/visible.
-    function cast(startx: number, starty: number, startz: number, endx: number, endy: number, endz: number): boolean;
-}
+/** @noSelfInFile */
 
 declare namespace cs2 {
-    // Returns integer/pointer.
+    /**
+     * Retrieves an interface pointer from a given module.
+     * @param module_name The name of the module.
+     * @param interface_name The interface name.
+     * @returns Pointer as an integer.
+     */
     function get_interface(module_name: string, interface_name: string): number;
 
-    // Returns integer/pointer.
+    /**
+     * Gets a console variable (cvar) pointer by name.
+     * @param cvar_name The name of the cvar.
+     * @returns Pointer as an integer.
+     */
     function get_cvar(cvar_name: string): number;
 
-    // Returns integer/pointer.
+    /**
+     * Returns the pointer to the entity list.
+     * @returns Pointer as an integer.
+     */
     function get_entity_list(): number;
 
-    // Returns integer/pointer.
+    /**
+     * Returns the pointer to the entity system.
+     * @returns Pointer as an integer.
+     */
     function get_entity_system(): number;
 
-    // Returns integer.
+    /**
+     * Returns the highest entity index.
+     * @returns Highest entity index as an integer.
+     */
     function get_highest_entity_index(): number;
 
-    // Returns integer/pointer.
+    /**
+     * Returns a pointer to global variables.
+     * @returns Pointer as an integer.
+     */
     function get_global_vars(): number;
 
-    // Returns integer/pointer.
+    /**
+     * Returns a pointer to game rules.
+     * @returns Pointer as an integer.
+     */
     function get_game_rules(): number;
 
-    // Returns integer/pointer.
+    /**
+     * Returns a pointer to the planted C4.
+     * @returns Pointer as an integer.
+     */
     function get_planted_c4(): number;
 
-    // Returns integer/pointer.
+    /**
+     * Returns a pointer to the view matrix.
+     * @returns Pointer as an integer.
+     */
     function get_view_matrix(): number;
 
-    // Returns x, y screen coords.
-    function world_to_screen(x: number, y: number, z: number): [number, number] | null;
+    /**
+     * Converts world coordinates to screen space.
+     * @param x World X coordinate.
+     * @param y World Y coordinate.
+     * @param z World Z coordinate.
+     * @returns Screen space coordinates as [x, y].
+     */
+    function world_to_screen(x: number, y: number, z: number): [number, number];
 
-    // Returns x, y, z world coords.
+    /**
+     * Gets the world position of a bone.
+     * @param bone_array Pointer to the bone array.
+     * @param boneid ID of the bone.
+     * @returns World position coordinates as [x, y, z].
+     */
     function get_bone_position(bone_array: number, boneid: number): [number, number, number];
 
-    // Returns entity list table with controller, pawn, clipping_weapon, bone_array as integers/pointers and is_teammate as boolean.
+    /**
+     * Represents a player entity.
+     */
+    interface Player {
+        /** Pointer to the player controller. */
+        controller: number;
+        /** Pointer to the player's pawn. */
+        pawn: number;
+        /** Pointer to the currently clipping weapon. */
+        clipping_weapon: number;
+        /** Pointer to the bone array. */
+        bone_array: number;
+        /** Whether the player is a teammate (optional). */
+        is_teammate?: boolean;
+    }
+
+    /**
+     * Returns a list of players.
+     * @returns Array of Player objects or null if unavailable.
+     */
     function get_player_list(): Player[] | null;
 
-    // Returns controller, pawn, clipping_weapon, bone_array as integers/pointers for local player.
+    /**
+     * Returns the local player.
+     * @returns Player object or null if unavailable.
+     */
     function get_local_player(): Player | null;
 
-    // Returns a table containing schema field names and memory offsets.
-    function get_schema_dump(): SchemaEntry[] | null;
-}
+    /**
+     * Represents a single schema field.
+     */
+    interface SchemaField {
+        /** The schema field name. */
+        name: string;
+        /** Memory offset of the field. */
+        offset: number;
+    }
 
-interface Player {
-    controller: number;
-    pawn: number;
-    clipping_weapon: number;
-    bone_array: number;
-    is_teammate: boolean;
-}
-
-interface SchemaEntry {
-    name: string;
-    offset: number;
+    /**
+     * Returns a table containing the dumped schema fields for Counter-Strike 2.
+     * @returns Array of SchemaField or null if dump unavailable.
+     */
+    function get_schema_dump(): SchemaField[] | null;
 }
