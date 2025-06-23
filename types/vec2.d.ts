@@ -7,36 +7,36 @@ declare namespace vec2 {
     /**
      * Reads a vec2 from memory (float precision).
      * @param address Memory address to read from.
-     * @returns The read Vec2.
+     * @returns The read vec2.
      */
-    function read_float(address: number): Vec2;
+    function read_float(address: number): vec2;
 
     /**
      * Reads a vec2 from memory (double precision).
      * @param address Memory address to read from.
-     * @returns The read Vec2.
+     * @returns The read vec2.
      */
-    function read_double(address: number): Vec2;
+    function read_double(address: number): vec2;
 
     /**
      * Writes a vec2 to memory (float precision).
      * @param address Memory address to write to.
-     * @param v The Vec2 to write.
+     * @param v The vec2 to write.
      */
-    function write_float(address: number, v: Vec2): void;
+    function write_float(address: number, v: vec2): void;
 
     /**
      * Writes a vec2 to memory (double precision).
      * @param address Memory address to write to.
-     * @param v The Vec2 to write.
+     * @param v The vec2 to write.
      */
-    function write_double(address: number, v: Vec2): void;
+    function write_double(address: number, v: vec2): void;
 }
 
 /**
  * Represents a 2D vector with x and y components.
  */
-declare class Vec2 {
+declare class vec2 {
     /**
      * Constructs a 2D vector.
      * @param x The x component.
@@ -47,19 +47,19 @@ declare class Vec2 {
     x: number;
     y: number;
 
-    static __add(a: Vec2, b: Vec2): Vec2;
+    static __add(a: vec2, b: vec2): vec2;
 
-    static __sub(a: Vec2, b: Vec2): Vec2;
+    static __sub(a: vec2, b: vec2): vec2;
 
-    static __mul(v: Vec2, scalar: number): Vec2;
+    static __mul(v: vec2, scalar: number): vec2;
 
-    static __div(v: Vec2, scalar: number): Vec2;
+    static __div(v: vec2, scalar: number): vec2;
 
-    static __unm(v: Vec2): Vec2;
+    static __unm(v: vec2): vec2;
 
-    static __len(v: Vec2): number;
+    static __len(v: vec2): number;
 
-    static __eq(a: Vec2, b: Vec2): boolean;
+    static __eq(a: vec2, b: vec2): boolean;
 
     /** @returns The vector's length. */
     length(): number;
@@ -68,25 +68,25 @@ declare class Vec2 {
     length_squared(): number;
 
     /** @returns A normalized copy of the vector. */
-    normalize(): Vec2;
+    normalize(): vec2;
 
     /**
      * Computes the dot product with another vector.
      * @param v The other vector.
      */
-    dot(v: Vec2): number;
+    dot(v: vec2): number;
 
     /**
      * Computes the distance to another vector.
      * @param v The other vector.
      */
-    distance(v: Vec2): number;
+    distance(v: vec2): number;
 
     /** @returns A new copy of the vector. */
-    clone(): Vec2;
+    clone(): vec2;
 
     /** @returns A perpendicular vector. */
-    perpendicular(): Vec2;
+    perpendicular(): vec2;
 
     /** @returns The angle in radians from the X-axis. */
     angle(): number;
@@ -95,31 +95,31 @@ declare class Vec2 {
      * Rotates the vector by the specified angle.
      * @param radians Angle in radians.
      */
-    rotate(radians: number): Vec2;
+    rotate(radians: number): vec2;
 
     /**
      * Linearly interpolates toward another vector.
      * @param v Target vector.
      * @param t Interpolation factor.
      */
-    lerp(v: Vec2, t: number): Vec2;
+    lerp(v: vec2, t: number): vec2;
 
     /**
      * Projects this vector onto another.
      * @param v The vector to project onto.
      */
-    project_onto(v: Vec2): Vec2;
+    project_onto(v: vec2): vec2;
 
     /**
      * Clamps the vector's length.
      * @param min Minimum length.
      * @param max Maximum length.
      */
-    clamp_length(min: number, max: number): Vec2;
+    clamp_length(min: number, max: number): vec2;
 
     /**
      * Reflects the vector off a normal.
      * @param normal The normal vector.
      */
-    reflect(normal: Vec2): Vec2;
+    reflect(normal: vec2): vec2;
 }
