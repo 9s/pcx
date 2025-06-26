@@ -8,6 +8,19 @@ declare namespace gui {
      */
     function get_tab(name: "aimbot" | "visuals" | "lua" | "settings"): Tab;
 
+    /**
+     * Serializes the current GUI state to a Base64-encoded string.
+     * @returns A Base64 string representing the current GUI state.
+     */
+    function get_state(): string;
+
+    /**
+     * Loads a GUI state from a Base64-encoded string.
+     * @param stateString A Base64 string previously obtained from `gui.get_state()`.
+     * @returns True if the state was loaded successfully, false otherwise.
+     */
+    function load_state(stateString: string): boolean;
+
     interface Tab {
         /**
          * Creates a panel inside the tab.
@@ -330,14 +343,4 @@ declare namespace gui {
          */
         set(index: number, value: boolean): void;
     }
-
-    /**
-     * Allowed keybind mode strings.
-     */
-    type KeyMode =
-        | "onhotkey"
-        | "offhotkey"
-        | "toggle"
-        | "singlepress"
-        | "always_on";
 }
